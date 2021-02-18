@@ -7,8 +7,7 @@ spring:
     name: product-view-service-ribbon
   thymeleaf:
     cache: false
-    prefix: classpath:/templates/
+    prefix: classpath:/template/
     suffix: .html
     encoding: UTF-8
-    content-type: text/html
     mode: HTML5

@@ -9,6 +9,7 @@
         <module name="eureka-server" />
         <module name="eurekaserver" />
         <module name="product-data-service" />
+        <module name="product-view-service-feign" />
         <module name="product-view-service-ribbon" />
         <module name="productdataservice" />
       </profile>
@@ -19,6 +20,7 @@
       <module name="eurekaServer" target="1.8" />
       <module name="parent" target="1.8" />
       <module name="product-data-service" target="1.8" />
+      <module name="product-view-service-feign" target="1.8" />
       <module name="product-view-service-ribbon" target="1.8" />
       <module name="productDataService" target="1.8" />
       <module name="productdataservice" target="1.8" />
