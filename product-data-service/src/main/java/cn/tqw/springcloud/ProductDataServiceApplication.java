@@ -1,5 +1,6 @@
 package cn.tqw.springcloud;
 
+import brave.sampler.Sampler;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.NetUtil;
@@ -7,6 +8,7 @@ import cn.hutool.core.util.NumberUtil;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.context.annotation.Bean;
 
 import java.util.Scanner;
 import java.util.concurrent.ExecutionException;
@@ -22,7 +24,7 @@ public class ProductDataServiceApplication {
         int defaultPort = 8001;
         Future<Integer> future = ThreadUtil.execAsync(() ->{
             int p = 0;
-            System.out.println("请于5秒钟内输入端口号, 推荐  8001 、 8002  或者  8003，超过5秒将默认使用 " + defaultPort);
+            System.out.println("请于3秒钟内输入端口号, 推荐  8001 、 8002  或者  8003，超过3秒将默认使用 " + defaultPort);
             Scanner scanner = new Scanner(System.in);
             while(true) {
                 String strPort = scanner.nextLine();
@@ -39,7 +41,7 @@ public class ProductDataServiceApplication {
             return p;
         });
         try{
-            port=future.get(5, TimeUnit.SECONDS);
+            port=future.get(3, TimeUnit.SECONDS);
         }
         catch (InterruptedException | ExecutionException | TimeoutException e){
             port = defaultPort;
@@ -51,5 +53,9 @@ public class ProductDataServiceApplication {
         }
 
         new SpringApplicationBuilder(ProductDataServiceApplication.class).properties("server.port=" + port).run(args);
+    }
+    @Bean
+    public Sampler defaultSampler() {
+        return Sampler.ALWAYS_SAMPLE;
     }
 }

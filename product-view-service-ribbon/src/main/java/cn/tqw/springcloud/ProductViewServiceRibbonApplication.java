@@ -28,7 +28,7 @@ public class ProductViewServiceRibbonApplication {
         int defaultPort = 8010;
         Future<Integer> future = ThreadUtil.execAsync(() ->{
             int p = 0;
-            System.out.println("请于5秒钟内输入端口号, 推荐  8010  超过5秒将默认使用 " + defaultPort);
+            System.out.println("请于3秒钟内输入端口号, 推荐  8010  超过3秒将默认使用 " + defaultPort);
             Scanner scanner = new Scanner(System.in);
             while(true) {
                 String strPort = scanner.nextLine();
@@ -45,7 +45,7 @@ public class ProductViewServiceRibbonApplication {
             return p;
         });
         try{
-            port=future.get(5, TimeUnit.SECONDS);
+            port=future.get(3, TimeUnit.SECONDS);
         }
         catch (InterruptedException | ExecutionException | TimeoutException e){
             port = defaultPort;
